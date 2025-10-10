@@ -2,12 +2,15 @@ package entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dto.PayrollStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,18 +21,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 @NoArgsConstructor  
 public class Payroll {
+	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;    
 	
 	@ManyToOne
+	@JsonIgnore  
     private Employee employee;
 
 	private  String month;
 	
-	
 	private BigDecimal grossSalary;
 	
-	private BigDecimal dedections;
+	private BigDecimal deductions;
 	
 	private BigDecimal netSalary;
 	
@@ -38,7 +43,7 @@ public class Payroll {
 	private boolean processed;
 	
 	@Enumerated(EnumType.STRING) 
-    private String status;
+    private PayrollStatus status;
 
 
 	public Long getId() {
@@ -81,13 +86,13 @@ public class Payroll {
 	}
 
 
-	public BigDecimal getDedections() {
-		return dedections;
+	public BigDecimal getDeductions() {
+		return deductions;
 	}
 
 
-	public void setDedections(BigDecimal dedections) {
-		this.dedections = dedections;
+	public void setDeductions(BigDecimal dedections) {
+		this.deductions = dedections;
 	}
 
 
@@ -121,15 +126,13 @@ public class Payroll {
 	}
 
 
-	public String getStatus() {
+	public PayrollStatus getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(String approved) {
+	public void setStatus(PayrollStatus approved) {
 		this.status = approved;
 	}
-    
-    
-    
+   
 }

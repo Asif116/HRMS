@@ -3,6 +3,8 @@ package entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,10 +32,15 @@ public class Employee {
 	
 	@ManyToOne(fetch =FetchType.LAZY)
 	@JoinColumn(name="user_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Ignore the lazy properties
 	private User user;
 	
 	 @Column(unique = true)
 	private String employeeCode;
+	   
+    private String name;
+
+	    
 
     private String department;
     
@@ -47,6 +54,12 @@ public class Employee {
     
     private BigDecimal salary;
     
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+    	this.name=name;
+    }
     
 	public Long getId() {
 		return id;

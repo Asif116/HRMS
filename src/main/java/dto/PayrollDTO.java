@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class PayrollDTO {
+	public PayrollDTO() {
+	}
+
+	
+
 	  private Long payrollId;
 	    private Long employeeId;
 	    private String employeeName;
